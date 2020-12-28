@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+
+
+{% block table %}
+<table>
+    {{kontak_form.as_table}}
+</table>
+<button type="submit">Kirim</button>
+{% endblock table %}

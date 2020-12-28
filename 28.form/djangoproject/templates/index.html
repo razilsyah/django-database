@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+{{heading}}
+{% endblock title %}
+
+
+
+{% block table %}
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{form_field.as_table}}
+    </table>
+    <button type="submit">Kirim</button>
+</form>
+{% endblock table %}

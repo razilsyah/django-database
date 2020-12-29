@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+
+# from django.http import HttpResponseRedirect
 # Create your views here.
 from .forms import PostForm
 from .models import PostModel
@@ -15,16 +16,12 @@ def index(request):
 
 
 def create(request):
-    post_form = PostForm()
-    print(request.POST)
-
+    # request.POST or None adalah validation memberitahukan bahwa form tsb harus diisi
+    post_form = PostForm(request.POST or None)
     if request.method == 'POST':
-        PostModel.objects.create(
-            judul=request.POST.get('judul'),
-            body=request.POST.get('body'),
-            category=request.POST.get('category')
-        )
-        return HttpResponseRedirect("/blog/")
+        if post_form.is_valid():
+            post_form.save()
+            return redirect('blog:index')
     context = {
         'page_title': 'CREATE',
         'post_form': post_form

@@ -1,7 +1,9 @@
 from django import forms
 
+from .models import PostModel
 
-class PostForm(forms.Form):
-    judul = forms.CharField(max_length=20)
-    body = forms.CharField(widget=forms.Textarea)
-    category = forms.CharField(max_length=20)
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = PostModel
+        fields = "__all__"
